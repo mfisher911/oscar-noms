@@ -15,17 +15,23 @@ The Descendents	Best Motion Picture	Best Actor (George Clooney)
 
 """
 
-
+from collections import defaultdict
 import argparse
 import csv
+import sys
 
 
 def main():
     """ Control function. """
     args = parse_args()
-    nominees = {}
+    nominees = defaultdict(list)
     read_csv(args.infile, nominees)
-    write_csv(args.outfile, nominees)
+    features, shorts = separate_shorts(nominees)
+    if args.outfile is None:
+        writer = csv.writer(sys.stdout)
+    else:
+        writer = csv.writer(open(args.outfile, 'wb'))
+    write_csv(writer, nominees, features, shorts)
 
 
 def parse_args():
@@ -34,6 +40,23 @@ def parse_args():
     parser.add_argument('-i', '--in', dest='infile')
     parser.add_argument('-o', '--out', dest='outfile')
     return parser.parse_args()
+
+
+def separate_shorts(nominees):
+    """ Separate the shorts from the features. """
+    features = set()
+    shorts = set()
+    for film in nominees.keys():
+        if any("Short" in i for i in nominees[film]):
+            shorts.add(film)
+        else:
+            features.add(film)
+
+    if (features | shorts) != set(nominees.keys()):
+        print "Warning: the following films were missed:\n{}"\
+            .format(list(set(nominees.keys()) - (features | shorts)))
+
+    return features, shorts
 
 
 def de_title(title):
@@ -70,21 +93,18 @@ def read_csv(infile, nominees):
             if specific:
                 cat = "{category} ({specific})".format(category=category,
                                                        specific=specific)
-            if film in nominees:
-                nominees[film].append(cat)
-            else:
-                nominees[film] = [cat]
+            nominees[film].append(cat)
 
 
-def write_csv(outfile, nominees):
+def write_csv(writer, nominees, *runclasses):
     """ Write the output CSV file. """
-    writer = csv.writer(open(outfile, 'wb'))
-    for film in sorted(nominees.keys(),
-                       cmp=lambda x, y: cmp(len(nominees[y]),
-                                            len(nominees[x])) \
-                           or cmp(x, y)):
-        title = de_title(film)
-        writer.writerow([title, ", ".join(sorted(nominees[film]))])
+    for runclass in runclasses:
+        for film in sorted(runclass,
+                           cmp=lambda x, y: cmp(len(nominees[y]),
+                                                len(nominees[x])) \
+                               or cmp(x, y)):
+            title = de_title(film)
+            writer.writerow([title, ", ".join(sorted(nominees[film]))])
 
 
 if __name__ == "__main__":
