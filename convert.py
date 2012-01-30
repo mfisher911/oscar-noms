@@ -36,7 +36,8 @@ def main():
 
 def parse_args():
     """ Grab the input and output filenames. """
-    parser = argparse.ArgumentParser(description='Rotate the Oscar List')
+    parser = argparse.ArgumentParser(description=('Rotate the Award '
+                                                  'Nominee List'))
     parser.add_argument('-i', '--in', dest='infile')
     parser.add_argument('-o', '--out', dest='outfile')
     return parser.parse_args()
