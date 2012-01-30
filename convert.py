@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-""" Reformat the Academy Awards Nominations List.
+""" Reformat Awards Nominations Lists.
 
 Input: sorted by category in a CSV file:
 
