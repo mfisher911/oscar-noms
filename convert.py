@@ -9,9 +9,9 @@ Best Actor	Demián Bichir, A Better Life	George Clooney, The Descendents
 
 Output (CSV):
 
-A Better Life	Best Actor (Demián Bichir)
-The Artist	Best Motion Picture
 The Descendents	Best Motion Picture	Best Actor (George Clooney)
+The Artist	Best Motion Picture
+A Better Life	Best Actor (Demián Bichir)
 
 """
 
