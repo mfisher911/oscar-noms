@@ -97,8 +97,12 @@ def read_csv(infile, nominees):
             cat = category
             film = nominee
             specific = None
-            if "," in nominee:
-                specific, film = nominee.split(', ')
+            try:
+                if "," in nominee:
+                    specific, film = nominee.split(', ')
+            except ValueError:
+                print "Error handling {}".format(nominee)
+                raise
             if " " in film:
                 film = title_prep(film)
             if specific:
