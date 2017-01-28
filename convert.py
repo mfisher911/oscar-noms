@@ -61,7 +61,11 @@ def separate_shorts(nominees):
 
 
 def de_title(title):
-    """ Undo the title-sorted preparation. """
+    """ Undo the title-sorted preparation.
+
+    >>> de_title('Jungle Book, The')
+    'The Jungle Book'
+    """
     words = title.split(' ')
     if words[-1] in ['A', 'An', 'The']:
         words = [words[-1]] + words[0:-1]
@@ -71,7 +75,13 @@ def de_title(title):
 
 
 def title_prep(title):
-    """ Prepare the title for title sorting (not on A, An, The). """
+    """ Prepare the title for title sorting (not on A, An, The).
+
+    >>> title_prep('The Jungle Book')
+    'Jungle Book, The'
+    >>> title_prep('Another 48 Hrs.')
+    'Another 48 Hrs.'
+    """
     words = title.split(' ')
     if words[0] in ['A', 'An', 'The']:
         title = "{}, {}".format(" ".join(words[1:]), words[0])
