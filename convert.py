@@ -112,8 +112,8 @@ def write_csv(writer, nominees, *runclasses):
     for runclass in runclasses:
         for film in sorted(runclass,
                            cmp=lambda x, y: cmp(len(nominees[y]),
-                                                len(nominees[x])) \
-                               or cmp(x, y)):
+                                                len(nominees[x]))
+                           or cmp(x, y)):
             title = de_title(film)
             writer.writerow([title, ", ".join(sorted(nominees[film]))])
 
