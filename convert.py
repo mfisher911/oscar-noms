@@ -1,17 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-""" Reformat Awards Nominations Lists.
+""" Reformat Awards Nominations Lists for Google Sheets
 
-Input: sorted by category in a CSV file:
+Input: sorted by category in a tab-separated file:
 
-Best Motion Picture	The Artist	The Descendents
-Best Actor	Demián Bichir, A Better Life	George Clooney, The Descendents
+    Best Picture	Call Me By Your Name	Darkest Hour	Dunkirk	Get Out	Lady Bird	Phantom Thread	The Post	The Shape of Water	"""Three Billboards Outside Ebbing, Missouri""\"
+    Lead Actor	Timothée Chalamet, Call Me By Your Name	Daniel Day-Lewis, Phantom Thread	Daniel Kaluuya, Get Out	Gary Oldman, Darkest Hour	"Denzel Washington,""Roman J. Israel, Esq.""\"
 
 Output (CSV):
 
-The Descendents	Best Motion Picture	Best Actor (George Clooney)
-The Artist	Best Motion Picture
-A Better Life	Best Actor (Demián Bichir)
+    The Shape of Water, "Best Director (Guillermo del Toro), Best Picture, ..."
+
+Upload this as a new document into Google Sheets and transfer the
+columns into the shared sheet with the scorecard.
 
 """
 
@@ -90,24 +91,22 @@ def title_prep(title):
 
 def read_csv(infile, nominees):
     """ Read and parse the input CSV file. """
-    reader = csv.reader(open(infile))
+    reader = csv.reader(open(infile), delimiter="\t")
     for row in reader:
         category = row.pop(0)
-        for nominee in row:
-            cat = category
-            film = nominee
-            specific = None
-            try:
-                if "," in nominee:
-                    specific, film = nominee.split(', ')
-            except ValueError:
-                print "Error handling {}".format(nominee)
-                raise
-            if " " in film:
-                film = title_prep(film)
-            if specific:
-                cat = "{category} ({specific})".format(category=category,
-                                                       specific=specific)
+        choices = csv.reader(row)
+        for nominee in choices:
+            if len(nominee) > 1:
+                honoree = nominee[0]
+                film = nominee[1]
+                if category == "Original Song":
+                    honoree = '"{}"'.format(honoree)
+                cat = "{category} ({honoree})".format(category=category,
+                                                      honoree=honoree)
+            else:
+                film = nominee[0]
+                cat = category
+            film = title_prep(film)
             nominees[film].append(cat)
 
 
