@@ -4,7 +4,7 @@
 
 Input: sorted by category in a tab-separated file:
 
-    Best Picture	Call Me By Your Name	Darkest Hour	Dunkirk	Get Out	Lady Bird	Phantom Thread	The Post	The Shape of Water	"""Three Billboards Outside Ebbing, Missouri""\"
+    Best Picture	Call Me By Your Name	Darkest Hour	Dunkirk	Get Out	Lady Bird	Phantom Thread	The Post	The Shape of Water	""\"Three Billboards Outside Ebbing, Missouri""\"
     Lead Actor	Timothée Chalamet, Call Me By Your Name	Daniel Day-Lewis, Phantom Thread	Daniel Kaluuya, Get Out	Gary Oldman, Darkest Hour	"Denzel Washington,""Roman J. Israel, Esq.""\"
 
 Output (CSV):
