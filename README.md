@@ -5,7 +5,7 @@ Introduction
 pivots them into a tab-separated file and makes slight formatting
 improvements.
 
-`convert.py` transforms a tab-sepratated file from being row-ordered
+`convert.py` transforms a tab-separated file from being row-ordered
 to column-ordered, with collapsed keys, specifically trying to address
 the problem of sorting out the most-nominated films and also separates
 short films from feature-length films.
@@ -28,6 +28,14 @@ the following structure:
     Lead Actress
     Sally Hawkins, The Shape of Water
     Frances McDormand, "Three Billboards Outside Ebbing, Missouri"
+    ...
+
+    Original Song
+    "I Can't Let You Throw Yourself Away", Toy Story 4
+    "(I'm Gonna) Love Me Again", Rocketman
+
+Note that "Original Song" is a magic phrase so that the song title is
+included appropriately.
 
 The output file should work nicely for `convert.py`.
 
