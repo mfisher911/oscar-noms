@@ -66,25 +66,36 @@ def title_prep(title):
     return title
 
 
-def read_csv(infile, nominees):
+def read_csv(infile):
     """ Read and parse the input CSV file. """
-    reader = csv.reader(open(infile), delimiter="\t")
+    reader = csv.reader(infile, delimiter="\t")
+    result = {"short": {}, "feature": {}}
+
     for row in reader:
         category = row.pop(0)
-        choices = csv.reader(row)
-        for nominee in choices:
+        length = "short" if "Short" in category else "feature"
+        nominees = list(csv.reader(row))
+        logging.debug("%s: %s", category, nominees)
+        for nominee in nominees:
+            logging.debug("nominee: %s", nominee)
+            film = nominee[-1]  # could be the only item
             if len(nominee) > 1:
                 honoree = nominee[0]
-                film = nominee[1]
-                if category == "Original Song":
-                    honoree = '"{}"'.format(honoree)
-                cat = "{category} ({honoree})".format(category=category,
-                                                      honoree=honoree)
+                cat = f"{category} ({honoree})"
             else:
-                film = nominee[0]
                 cat = category
+
             film = title_prep(film)
-            nominees[film].append(cat)
+            if film not in result[length]:
+                result[length][film] = [cat]
+            else:
+                result[length][film] = sorted([*result[length][film], cat])
+
+            logging.debug(
+                "result[%s][%s] = %s", length, film, result[length][film]
+            )
+
+    return result
 
 
 def multisort(xs, specs):
