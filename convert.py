@@ -14,7 +14,7 @@ Output (CSV):
 Upload this as a new document into Google Sheets and transfer the
 columns into the shared sheet with the scorecard.
 
-"""
+"""  # noqa
 
 from operator import itemgetter
 import csv
@@ -23,9 +23,6 @@ import logging
 import click
 from click_loglevel import LogLevel
 
-
-def restore_title(title):
-    """Undo the title-sorted preparation.
 
 @click.command()
 @click.option("-l", "--level", type=LogLevel(), default=logging.ERROR)
