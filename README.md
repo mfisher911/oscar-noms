@@ -17,7 +17,9 @@ short films from feature-length films.
 Usage
 -----
 
-    ./get_nominations.py --url https://en.wikipedia.org/wiki/93rd_Academy_Awards 2021-in.csv
+    ./get_nominations.py \
+        --url https://en.wikipedia.org/wiki/93rd_Academy_Awards \
+        2021-in.csv
 
 This creates a CSV file that is similar to the "in-list.csv" file that
 would have been produced by `prep-in.py` (so it can be directly fed to
