@@ -27,21 +27,6 @@ from click_loglevel import LogLevel
 def restore_title(title):
     """Undo the title-sorted preparation.
 
-def separate_shorts(nominees):
-    """ Separate the shorts from the features. """
-    features = set()
-    shorts = set()
-    for film in nominees.keys():
-        if any("Short" in i for i in nominees[film]):
-            shorts.add(film)
-        else:
-            features.add(film)
-
-    if (features | shorts) != set(nominees.keys()):
-        print "Warning: the following films were missed:\n{}"\
-            .format(list(set(nominees.keys()) - (features | shorts)))
-
-    return features, shorts
 @click.command()
 @click.option("-l", "--level", type=LogLevel(), default=logging.ERROR)
 @click.argument("src", type=click.File("r"))
