@@ -76,7 +76,7 @@ Given the sample input:
 
 The output will be similar to:
 
-    The Descendents,"Best Motion Picture, Best Actor (George Clooney)"
+    The Descendents,"Best Actor (George Clooney), Best Motion Picture"
     The Artist,Best Motion Picture
     A Better Life,Best Actor (Demián Bichir)
 
