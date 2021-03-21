@@ -43,6 +43,8 @@ def parse_args():
     parser.add_argument('-o', '--out', dest='outfile')
     return parser.parse_args()
 
+def restore_title(title):
+    """Undo the title-sorted preparation.
 
 def separate_shorts(nominees):
     """ Separate the shorts from the features. """
@@ -61,10 +63,10 @@ def separate_shorts(nominees):
     return features, shorts
 
 
-def de_title(title):
-    """ Undo the title-sorted preparation.
+def restore_title(title):
+    """Undo the title-sorted preparation.
 
-    >>> de_title('Jungle Book, The')
+    >>> restore_title('Jungle Book, The')
     'The Jungle Book'
     """
     words = title.split(" ")
@@ -117,8 +119,8 @@ def write_csv(writer, nominees, *runclasses):
                            cmp=lambda x, y: cmp(len(nominees[y]),
                                                 len(nominees[x]))
                            or cmp(x, y)):
-            title = de_title(film)
             writer.writerow([title, ", ".join(sorted(nominees[film]))])
+            title = restore_title(film)
 
 
 if __name__ == "__main__":
