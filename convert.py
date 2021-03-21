@@ -16,33 +16,13 @@ columns into the shared sheet with the scorecard.
 
 """
 
-from collections import defaultdict
-import argparse
 from operator import itemgetter
 import csv
-import sys
+import logging
 
+import click
+from click_loglevel import LogLevel
 
-def main():
-    """ Control function. """
-    args = parse_args()
-    nominees = defaultdict(list)
-    read_csv(args.infile, nominees)
-    features, shorts = separate_shorts(nominees)
-    if args.outfile is None:
-        writer = csv.writer(sys.stdout)
-    else:
-        writer = csv.writer(open(args.outfile, 'wb'))
-    write_csv(writer, nominees, features, shorts)
-
-
-def parse_args():
-    """ Grab the input and output filenames. """
-    parser = argparse.ArgumentParser(description=('Rotate the Award '
-                                                  'Nominee List'))
-    parser.add_argument('-i', '--in', dest='infile')
-    parser.add_argument('-o', '--out', dest='outfile')
-    return parser.parse_args()
 
 def restore_title(title):
     """Undo the title-sorted preparation.
@@ -62,6 +42,15 @@ def separate_shorts(nominees):
             .format(list(set(nominees.keys()) - (features | shorts)))
 
     return features, shorts
+@click.command()
+@click.option("-l", "--level", type=LogLevel(), default=logging.ERROR)
+@click.argument("src", type=click.File("r"))
+@click.argument("dest", type=click.File("w"))
+def main(level, src, dest):
+    """Read SRC file and build DEST."""
+    logging.basicConfig(format="[%(levelname)-8s] %(message)s", level=level)
+    nominees = read_csv(src)
+    write_csv(csv.writer(dest), nominees)
 
 
 def restore_title(title):
