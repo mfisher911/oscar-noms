@@ -1,9 +1,12 @@
 Introduction
 ============
 
-`prep-in.py` takes a list of nominations, sorted by category, and
-pivots them into a tab-separated file and makes slight formatting
+`prep-in.py` takes a list of nominations, sorted by category, pivots
+them into a tab-separated file and makes slight formatting
 improvements.
+
+New for 2021, `get_nominations.py` builds the list that `prep-in.py`
+could have produced by scraping Wikipedia.
 
 `convert.py` transforms a tab-separated file from being row-ordered
 to column-ordered, with collapsed keys, specifically trying to address
@@ -13,6 +16,12 @@ short films from feature-length films.
 
 Usage
 -----
+
+    ./get_nominations.py --url https://en.wikipedia.org/wiki/93rd_Academy_Awards 2021-in.csv
+
+This creates a CSV file that is similar to the "in-list.csv" file that
+would have been produced by `prep-in.py` (so it can be directly fed to
+`convert.py`).
 
     prep-in.py --in in-raw.txt --out in-list.csv
     
@@ -66,14 +75,14 @@ Given the sample input:
 The output will be similar to:
 
     The Descendents,"Best Motion Picture, Best Actor (George Clooney)"
-    The Artist,Best Motion Picture A Better Life,Best Actor (Demián Bichir)
+    The Artist,Best Motion Picture
+    A Better Life,Best Actor (Demián Bichir)
 
+It will be sorted by count of nominations (most to least) and then by
+title. The nominated categories are sorted alphabetically (some are
+abbreviated).
 
-Known Bugs
-----------
-
-At current, the output does not maintain the order of categories read
-from input.
+This output can be imported into (for instance) a Google Spreadsheet.
 
 
 Copyright
