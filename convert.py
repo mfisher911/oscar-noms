@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """ Reformat Awards Nominations Lists for Google Sheets
 
@@ -18,6 +18,7 @@ columns into the shared sheet with the scorecard.
 
 from collections import defaultdict
 import argparse
+from operator import itemgetter
 import csv
 import sys
 
@@ -112,15 +113,24 @@ def read_csv(infile, nominees):
             nominees[film].append(cat)
 
 
-def write_csv(writer, nominees, *runclasses):
+def multisort(xs, specs):
+    for key, reverse in reversed(specs):
+        xs.sort(key=itemgetter(key), reverse=reverse)
+    return xs
+
+
+def write_csv(writer, nominees):
     """ Write the output CSV file. """
-    for runclass in runclasses:
-        for film in sorted(runclass,
-                           cmp=lambda x, y: cmp(len(nominees[y]),
-                                                len(nominees[x]))
-                           or cmp(x, y)):
-            writer.writerow([title, ", ".join(sorted(nominees[film]))])
+    # Add space for the headers
+    writer.writerows([[None, None], [None, None], [None, None]])
+
+    for runclass in ["feature", "short"]:
+        nom_count = []
+        for i in nominees[runclass]:
+            nom_count.append((i, len(nominees[runclass][i])))
+        for film, _ in multisort(nom_count, ((1, True), (0, False))):
             title = restore_title(film)
+            writer.writerow([title, ", ".join(nominees[runclass][film])])
 
 
 if __name__ == "__main__":
