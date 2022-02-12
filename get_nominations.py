@@ -128,10 +128,10 @@ def main(level, url, dest):
         )
         url = input("> ")
 
-    r = httpx.get(url)
-    soup = BeautifulSoup(r.text, "html.parser")
     # get to nominations table
     awards = soup.find_all("table", class_="wikitable")[0]
+    wiki = httpx.get(url)
+    soup = BeautifulSoup(wiki.text, "html.parser")
 
     writer = csv.writer(dest, delimiter="\t")
     for nom in awards.select("tbody tr td"):
@@ -140,7 +140,7 @@ def main(level, url, dest):
         for i in data["nominees"]:
             mem_file = io.StringIO()
             mem_writer = csv.writer(mem_file)
-            if type(i) is tuple:
+            if isinstance(i, tuple):
                 mem_writer.writerow(i)
             else:
                 mem_writer.writerow([i])
