@@ -1,12 +1,8 @@
 Introduction
 ============
 
-`prep-in.py` takes a list of nominations, sorted by category, pivots
-them into a tab-separated file and makes slight formatting
-improvements.
-
-New for 2021, `get_nominations.py` builds the list that `prep-in.py`
-could have produced by scraping Wikipedia.
+New for 2021, `get_nominations.py` builds the list of category
+nominations by scraping Wikipedia.
 
 `convert.py` transforms a tab-separated file from being row-ordered
 to column-ordered, with collapsed keys, specifically trying to address
@@ -21,34 +17,7 @@ Usage
         --url https://en.wikipedia.org/wiki/93rd_Academy_Awards \
         2021-in.csv
 
-This creates a CSV file that is similar to the "in-list.csv" file that
-would have been produced by `prep-in.py` (so it can be directly fed to
-`convert.py`).
-
-    prep-in.py --in in-raw.txt --out in-list.csv
-    
-`in-raw.txt` is expected to be a file grouped by category with
-the following structure:
-
-    Best Picture
-    Call Me By Your Name
-    Darkest Hour
-    Dunkirk
-    ...
-    
-    Lead Actress
-    Sally Hawkins, The Shape of Water
-    Frances McDormand, "Three Billboards Outside Ebbing, Missouri"
-    ...
-
-    Original Song
-    "I Can't Let You Throw Yourself Away", Toy Story 4
-    "(I'm Gonna) Love Me Again", Rocketman
-
-Note that "Original Song" is a magic phrase so that the song title is
-included appropriately.
-
-The output file should work nicely for `convert.py`.
+This creates a CSV file that can be directly fed to `convert.py`.
 
     convert.py --in in-list.csv --out out-list.csv
 
