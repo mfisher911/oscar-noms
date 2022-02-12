@@ -128,10 +128,20 @@ def main(level, url, dest):
         )
         url = input("> ")
 
-    # get to nominations table
-    awards = soup.find_all("table", class_="wikitable")[0]
     wiki = httpx.get(url)
     soup = BeautifulSoup(wiki.text, "html.parser")
+    # get to nominations table -- format change in 2022 pushed from 0 to 1
+    noms = 1
+    awards = soup.find_all("table", class_="wikitable")[noms]
+    try:
+        "Best Picture" in [
+            i.select("div")[0].text for i in awards.select("tbody tr td")
+        ]
+    except KeyError:
+        print("\nWikipedia page structure must have changed.")
+        print(f"    Note: we tried {noms=}.")
+        print('Try: soup.find_all("table", class_="wikitable")', "\n")
+        breakpoint()
 
     writer = csv.writer(dest, delimiter="\t")
     for nom in awards.select("tbody tr td"):
