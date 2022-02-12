@@ -84,7 +84,7 @@ def clean(cat):
             result["nominees"].append(nomination)
             logging.debug("    %s", nomination)
     else:
-        raise ValueError("Not sure how to handle %s", award)
+        raise ValueError(f"Not sure how to handle {award}")
 
     return result
 
