@@ -64,7 +64,7 @@ def title_prep(title):
 
 
 def read_csv(infile):
-    """ Read and parse the input CSV file. """
+    """Read and parse the input CSV file."""
     reader = csv.reader(infile, delimiter="\t")
     result = {"short": {}, "feature": {}}
 
@@ -96,13 +96,14 @@ def read_csv(infile):
 
 
 def multisort(xs, specs):
+    """Sort by multiple factors; taken from the Python Sorting HOW TO."""
     for key, reverse in reversed(specs):
         xs.sort(key=itemgetter(key), reverse=reverse)
     return xs
 
 
 def write_csv(writer, nominees):
-    """ Write the output CSV file. """
+    """Write the output CSV file."""
     # Add space for the headers
     writer.writerows([[None, None], [None, None], [None, None]])
 
