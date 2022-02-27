@@ -102,18 +102,33 @@ def multisort(xs, specs):
     return xs
 
 
+def sort_shorts(nominees):
+    """Sort the shorts by category."""
+    categories = sorted(set([i[0] for i in nominees.values()]))
+    result = []
+    for category in categories:
+        result.extend([k for k, v in nominees.items() if v[0] == category])
+    logging.debug("sort_shorts() = %s", result)
+    return result
+
+
 def write_csv(writer, nominees):
     """Write the output CSV file."""
     # Add space for the headers
     writer.writerows([[None, None], [None, None], [None, None]])
 
-    for runclass in ["feature", "short"]:
-        nom_count = []
-        for i in nominees[runclass]:
-            nom_count.append((i, len(nominees[runclass][i])))
-        for film, _ in multisort(nom_count, ((1, True), (0, False))):
-            title = restore_title(film)
-            writer.writerow([title, ", ".join(nominees[runclass][film])])
+    # assumes that shorts are only eligible for one category
+    nom_counts = []
+    for i in nominees["feature"]:
+        nom_counts.append((i, len(nominees["feature"][i])))
+    for film, _ in multisort(nom_counts, ((1, True), (0, False))):
+        title = restore_title(film)
+        writer.writerow([title, ", ".join(nominees["feature"][film])])
+
+    # sort the shorts by category and name
+    for film in sort_shorts(nominees["short"]):
+        title = restore_title(film)
+        writer.writerow([title, ", ".join(nominees["short"][film])])
 
 
 if __name__ == "__main__":
