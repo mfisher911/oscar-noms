@@ -11,8 +11,8 @@ click-loglevel==0.4.0.post1
 decorator==5.1.1
 executing==0.8.2
 h11==0.12.0
-httpcore==0.14.7
-httpx==0.22.0
+httpcore==0.15.0
+httpx==0.23.0
 idna==3.3
 ipython==8.0.1
 jedi==0.18.1
