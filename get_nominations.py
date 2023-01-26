@@ -52,17 +52,26 @@ def clean(cat):
     if award in title_only:
         for nominee in cat.select("ul li"):
             # need to get the part after the dash
-            try:
+            if len(nominee.select("a")) >= 1:
                 title = nominee.select("a")[0].text
-            except IndexError:
-                logging.info("No <a> for %s", title)
-                title = nominee.text
+            elif len(nominee.select("i")) >= 1:
+                title = nominee.select("i")[0].text
+            else:
+                logging.critical("don't understand %s (%s)", nominee, award)
+                next
             result["nominees"].append(title)
             logging.debug("    %s", title)
     elif award in subject_title:
         for nominee in cat.select("ul li"):
             # need before and after dash
-            subject, title = nominee.select("a")[0:2]
+            if len(nominee.select("a")) == 1:
+                subject = nominee.select("a")[0]
+                title = nominee.select("i")[0]
+            elif len(nominee.select("a")) >= 2:
+                subject, title = nominee.select("a")[0:2]
+            else:
+                logging.error("can't understand: %s (%s)", nominee, award)
+                next
             nomination = (
                 subject.text,
                 title.text,
