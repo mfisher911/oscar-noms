@@ -19,7 +19,7 @@ Usage
 
 This creates a CSV file that can be directly fed to `convert.py`.
 
-    convert.py --in in-list.csv --out out-list.csv
+    ./convert.py in-list.csv out-list.csv
 
 `in-list.csv` is expected to be a tab-separated file with the following
 structure:
