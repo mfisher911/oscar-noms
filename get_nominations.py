@@ -32,10 +32,10 @@ def clean(cat):
         "Best Original Score",
         "Best Film Editing",
         "Best Visual Effects",
-        "Best Animated Feature Film",
+        "Best Animated Feature",
         "Best Animated Short Film",
-        "Best Documentary Feature",
-        "Best Documentary Short Subject",
+        "Best Documentary Feature Film",
+        "Best Documentary Short Film",
         "Best Live Action Short Film",
     ]
     subject_title = [
