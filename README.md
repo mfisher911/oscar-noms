@@ -15,7 +15,7 @@ Usage
 
     ./get_nominations.py \
         --url https://en.wikipedia.org/wiki/93rd_Academy_Awards \
-        2021-in.csv
+        $(date '+%Y-in.csv')
 
 This creates a CSV file that can be directly fed to `convert.py`.
 
