@@ -62,4 +62,3 @@ Copyright
 Oscar (R) and Academy Awards (R) are registered trademarks of the
 Academy of Motion Picture Arts and Sciences (R). Use in this project
 title does not indicate a relationship with the above entities.
-
