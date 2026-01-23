@@ -24,6 +24,7 @@ def clean(cat):
         "Best Original Screenplay",
         "Best Adapted Screenplay",
         "Best International Feature Film",
+        "Best Casting",
         "Best Cinematography",
         "Best Costume Design",
         "Best Production Design",
