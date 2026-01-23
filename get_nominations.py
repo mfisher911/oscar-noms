@@ -117,8 +117,11 @@ def simplify(nomination):
 @click.command()
 @click.option("-l", "--level", type=LogLevel(), default=logging.ERROR)
 @click.option("--url", help="Wikipedia URL")
+@click.option(
+    "--file", help="Wikipedia page source path", type=click.File("r")
+)
 @click.argument("dest", type=click.File("w"))
-def main(level, url, dest):
+def main(level, url, file, dest):
     """Create DEST.
 
     DEST is a file that can be used as input for convert.py. It will
@@ -129,7 +132,7 @@ def main(level, url, dest):
 
     """
     logging.basicConfig(format="[%(levelname)-8s] %(message)s", level=level)
-    if not url:
+    if not url and not file:
         year = date.today().year
         print(
             f"Get the Wikipedia link:\n"
@@ -137,8 +140,12 @@ def main(level, url, dest):
         )
         url = input("> ")
 
-    wiki = httpx.get(url)
-    soup = BeautifulSoup(wiki.text, "html.parser")
+    if not file:
+        headers = {"user-agent": "get_nominations/0.0.1"}
+        wiki = httpx.get(url, headers=headers)
+        soup = BeautifulSoup(wiki.text, "html.parser")
+    else:
+        soup = BeautifulSoup(file, "html.parser")
     # get to nominations table -- format change in 2022 pushed from 0 to 1
     noms = 1
     awards = soup.find_all("table", class_="wikitable")[noms]

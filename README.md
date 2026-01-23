@@ -4,6 +4,10 @@ Introduction
 New for 2021, `get_nominations.py` builds the list of category
 nominations by scraping Wikipedia.
 
+New for 2026, `get_nominations.py` accepts a `--file` option for
+reading the Wikipedia content from a local/saved HTML file. This was
+driven by Wikipedia adding anti-bot/scraping controls.
+
 `convert.py` transforms a tab-separated file from being row-ordered
 to column-ordered, with collapsed keys, specifically trying to address
 the problem of sorting out the most-nominated films and also separates
