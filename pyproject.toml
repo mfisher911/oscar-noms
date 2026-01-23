@@ -1,0 +1,88 @@
+[project]
+name = "oscar-noms"
+version = "2026.01.22"
+requires-python = ">=3.14"
+dependencies = [
+    "anyio==4.8.0",
+    "appnope==0.1.4",
+    "asttokens==3.0.0",
+    "backcall==0.2.0",
+    "beautifulsoup4==4.12.3",
+    "black==24.10.0",
+    "certifi==2024.12.14",
+    "charset-normalizer==3.4.1",
+    "click==8.1.8",
+    "click-loglevel==0.5.1",
+    "decorator==5.1.1",
+    "executing==2.2.0",
+    "h11>=0.16.0",
+    "httpcore>=1.0.9",
+    "httpx==0.28.1",
+    "idna==3.10",
+    "ipython==8.31.0",
+    "jedi==0.19.2",
+    "matplotlib-inline==0.1.7",
+    "mypy-extensions==1.0.0",
+    "packaging==24.2",
+    "parso==0.8.4",
+    "pathspec==0.12.1",
+    "pexpect==4.9.0",
+    "pickleshare==0.7.5",
+    "pip>=25.3",
+    "platformdirs==4.3.6",
+    "prompt-toolkit==3.0.50",
+    "ptyprocess==0.7.0",
+    "pure-eval==0.2.3",
+    "pygments==2.19.1",
+    "rfc3986==2.0.0",
+    "six==1.17.0",
+    "sniffio==1.3.1",
+    "soupsieve==2.6",
+    "stack-data==0.6.3",
+    "tomli==2.2.1",
+    "traitlets==5.14.3",
+    "typing-extensions==4.12.2",
+    "wcwidth==0.2.13",
+]
+
+[tool.black]
+line-length = 78
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 78
+
+[tool.pylint.messages_control]
+# https://black.readthedocs.io/en/stable/compatible_configs.html#pylint
+disable = "C0330, C0326"
+
+[tool.coverage.run]
+plugins = "django_coverage_plugin"
+omit = [
+    ".venv/*",
+    "*__init__.py",
+    "*/migrations/*",
+    "*/templates/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "if self.debug:",
+    "^  pragma: no cover",
+    "^  raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "^  ignore_errors = True",
+]
+omit = [
+    ".venv/*",
+    "*__init__.py",
+    "*/migrations/*",
+    "*/templates/*",
+]
+
+[tool.ruff]
+line-length = 78
