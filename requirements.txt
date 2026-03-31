@@ -92,7 +92,7 @@ pure-eval==0.2.3
     # via
     #   oscar-noms (pyproject.toml)
     #   stack-data
-pygments==2.19.1
+pygments==2.20.0
     # via
     #   oscar-noms (pyproject.toml)
     #   ipython
