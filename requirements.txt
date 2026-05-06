@@ -76,7 +76,7 @@ pexpect==4.9.0
     #   ipython
 pickleshare==0.7.5
     # via oscar-noms (pyproject.toml)
-pip==26.0.1
+pip==26.1
     # via oscar-noms (pyproject.toml)
 platformdirs==4.3.6
     # via oscar-noms (pyproject.toml)
