@@ -3,7 +3,7 @@ name = "oscar-noms"
 version = "2026.01.22"
 requires-python = ">=3.14"
 dependencies = [
-    "anyio==4.8.0",
+    "anyio==4.14.2",
     "appnope==0.1.4",
     "asttokens==3.0.0",
     "backcall==0.2.0",
