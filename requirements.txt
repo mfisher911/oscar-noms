@@ -14,7 +14,7 @@ backcall==0.2.0
     # via oscar-noms (pyproject.toml)
 beautifulsoup4==4.12.3
     # via oscar-noms (pyproject.toml)
-certifi==2024.12.14
+certifi==2026.10.19
     # via
     #   oscar-noms (pyproject.toml)
     #   httpcore

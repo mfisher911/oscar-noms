@@ -8,7 +8,7 @@ dependencies = [
     "asttokens==3.0.0",
     "backcall==0.2.0",
     "beautifulsoup4==4.12.3",
-    "certifi==2024.12.14",
+    "certifi==2026.10.19",
     "charset-normalizer==3.4.1",
     "click==8.1.8",
     "click-loglevel==0.5.1",
